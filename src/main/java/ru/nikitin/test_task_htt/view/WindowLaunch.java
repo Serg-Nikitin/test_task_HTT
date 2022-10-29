@@ -9,17 +9,15 @@ import java.awt.*;
 @Component
 public class WindowLaunch implements CommandLineRunner {
 
-    private final Window window;
+    private final MainWindow window;
 
 
-    public WindowLaunch(Window window) {
+    public WindowLaunch(MainWindow window) {
         this.window = window;
     }
 
     @Override
     public void run(String... args) throws Exception {
-        EventQueue.invokeLater(() -> {
-            window.setVisible(true);
-        });
+        EventQueue.invokeLater(window::init);
     }
 }
