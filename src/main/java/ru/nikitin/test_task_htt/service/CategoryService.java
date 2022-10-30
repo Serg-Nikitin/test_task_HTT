@@ -19,14 +19,6 @@ public class CategoryService {
         this.repository = repository;
     }
 
-
-    public List<Category> getAll() {
-        return repository.findAll()
-                .stream()
-                .sorted(Comparator.comparing(Category::getName))
-                .collect(Collectors.toList());
-    }
-
     public List<Category> getAllWithProducts(){
         return repository.getAllWithProducts();
     }

@@ -18,13 +18,6 @@ public class CategoryServiceTest {
     @Autowired
     private CategoryService service;
 
-
-    @Test
-    public void shouldReturnListCategorySortedByName() {
-        var categories = service.getAll();
-        Assertions.assertIterableEquals(listCategories, categories);
-    }
-
     @Test
     public void shouldReturnListCategoryWithProducts() {
         var categories = service.getAllWithProducts();
