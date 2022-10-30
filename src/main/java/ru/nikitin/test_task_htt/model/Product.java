@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -18,7 +19,7 @@ public class Product extends NamedBaseEntity {
     @JoinTable(name = "common_table", joinColumns =
     @JoinColumn(name = "id_product"),
             inverseJoinColumns = @JoinColumn(name = "id_category"))
-    private Set<Category> categories;
+    private List<Category> categories;
 
     public Product(Integer id, String name) {
         super(id, name);

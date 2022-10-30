@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,10 +19,14 @@ import java.util.Set;
 public class Category extends NamedBaseEntity {
 
     @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
-    private Set<Product> products;
+    private List<Product> products;
 
     public Category(Integer id, String name) {
         super(id, name);
     }
 
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

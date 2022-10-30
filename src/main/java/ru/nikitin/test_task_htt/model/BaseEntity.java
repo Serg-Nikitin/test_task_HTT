@@ -23,12 +23,12 @@ abstract class BaseEntity implements HasId {
 
     @Override
     public Integer getId() {
-        return null;
+        return id;
     }
 
     @Override
     public void setId(Integer id) {
-
+        this.id = id;
     }
 
     @Override
@@ -46,6 +46,6 @@ abstract class BaseEntity implements HasId {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + ":" + this.getId();
+        return getClass().getSimpleName() + ": (" + this.getId()+')';
     }
 }

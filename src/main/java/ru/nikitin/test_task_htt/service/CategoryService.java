@@ -27,4 +27,8 @@ public class CategoryService {
                 .collect(Collectors.toList());
     }
 
+    public List<Category> getAllWithProducts(){
+        return repository.getAllWithProducts();
+    }
+
 }
