@@ -17,3 +17,5 @@ spring:
     init:
       mode: always
       schema-locations: classpath:create_schema.sql
+  profiles:
+    active: view
