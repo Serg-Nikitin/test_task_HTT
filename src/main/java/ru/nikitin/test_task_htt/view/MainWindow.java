@@ -1,52 +1,56 @@
 package ru.nikitin.test_task_htt.view;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
+import ru.nikitin.test_task_htt.model.Category;
+import ru.nikitin.test_task_htt.model.Product;
+import ru.nikitin.test_task_htt.service.CategoryService;
 
 import javax.swing.*;
+import java.awt.*;
+import java.util.List;
 
 @Component
 @Slf4j
 @Profile("view")
 public class MainWindow extends JFrame {
-    private JPanel categories;
-    private JPanel products;
     private JPanel basePanel;
+    private JPanel productsWithCategories;
+
+    private final CategoryService service;
+
+    public MainWindow(CategoryService service) {
+        this.service = service;
+    }
 
     public void init() {
-        changeLeft();
-        changeRight();
-
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 400);
+        setSize(200, 400);
         setContentPane(basePanel);
+        populatePanel();
         this.setVisible(true);
     }
 
-    private void changeLeft() {
-        settingUp(categories);
-        var group = new ButtonGroup();
-        int quantity = 3;
-        for (int i = 0; i < quantity; i++) {
-            var btn = new CategoriesBtn("name " + i);
+    private void populatePanel() {
+        var list = service.getAllWithProducts();
+        int count =
+         list.stream().map(el -> el.getProducts().size()).reduce(0, (acc, el) -> {
+            acc += el;
+            return acc;
+        });
 
-            group.add(btn.getBtn());
-            log.info("button value = " + btn);
-            categories.add(btn.getBtn());
+        GridLayout layout = new GridLayout(count, 2);
+        productsWithCategories.setLayout(layout);
+
+        for (Category category : list) {
+            List<Product> products = category.getProducts();
+            for (Product product : products) {
+                productsWithCategories.add(new NameLabel(category.getName()).getLabel());
+                productsWithCategories.add(new NameLabel(product.getName()).getLabel());
+            }
         }
-    }
 
-    private void changeRight() {
-        settingUp(products);
-        var quantity = 10;
-        for (int i = 0; i < quantity; i++) {
-            products.add(new ProductsLabel("name " + i).getLabel());
-        }
-    }
-
-    private void settingUp(JPanel panel) {
-        BoxLayout boxLayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
-        panel.setLayout(boxLayout);
     }
 }

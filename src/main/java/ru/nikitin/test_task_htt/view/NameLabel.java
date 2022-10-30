@@ -3,13 +3,12 @@ package ru.nikitin.test_task_htt.view;
 import javax.swing.*;
 import java.awt.*;
 
-public class ProductsLabel {
+public class NameLabel {
 
     private JLabel label;
 
-    public ProductsLabel(String text) {
+    public NameLabel(String text) {
         label = createLabel(text);
-        label.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
 
     private JLabel createLabel(String text) {
