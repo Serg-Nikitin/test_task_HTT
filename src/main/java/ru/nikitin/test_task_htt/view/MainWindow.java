@@ -41,8 +41,10 @@ public class MainWindow extends JFrame {
             return acc;
         });
 
-        GridLayout layout = new GridLayout(count, 2);
+        GridLayout layout = new GridLayout(count+1, 2);
         productsWithCategories.setLayout(layout);
+        productsWithCategories.add(new NameLabel("Categories").getLabel());
+        productsWithCategories.add(new NameLabel("Products").getLabel());
 
         for (Category category : list) {
             List<Product> products = category.getProducts();

@@ -1,6 +1,7 @@
 package ru.nikitin.test_task_htt.view;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class NameLabel {
@@ -12,8 +13,9 @@ public class NameLabel {
     }
 
     private JLabel createLabel(String text) {
-       var label = new JLabel(text);
-       return label;
+        var label = new JLabel(text, SwingConstants.CENTER);
+        label.setBorder(new LineBorder(Color.BLACK, 1));
+        return label;
     }
 
     public JLabel getLabel() {
