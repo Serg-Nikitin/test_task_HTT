@@ -1,7 +1,6 @@
 package ru.nikitin.test_task_htt.view;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import ru.nikitin.test_task_htt.model.Category;
@@ -15,9 +14,11 @@ import java.util.List;
 @Component
 @Slf4j
 @Profile("view")
-public class MainWindow extends JFrame {
+public class MainWindow extends JFrame implements Display {
     private JPanel basePanel;
     private JPanel productsWithCategories;
+    private final static String HEADER_CATEGORIES = "Categories";
+    private final static String HEADER_PRODUCTS = "Products";
 
     private final CategoryService service;
 
@@ -36,15 +37,15 @@ public class MainWindow extends JFrame {
     private void populatePanel() {
         var list = service.getAllWithProducts();
         int count =
-         list.stream().map(el -> el.getProducts().size()).reduce(0, (acc, el) -> {
-            acc += el;
-            return acc;
-        });
+                list.stream().map(el -> el.getProducts().size()).reduce(0, (acc, el) -> {
+                    acc += el;
+                    return acc;
+                });
 
-        GridLayout layout = new GridLayout(count+1, 2);
+        GridLayout layout = new GridLayout(count + 1, 2);
         productsWithCategories.setLayout(layout);
-        productsWithCategories.add(new NameLabel("Categories").getLabel());
-        productsWithCategories.add(new NameLabel("Products").getLabel());
+        productsWithCategories.add(new NameLabel(HEADER_CATEGORIES).getLabel());
+        productsWithCategories.add(new NameLabel(HEADER_PRODUCTS).getLabel());
 
         for (Category category : list) {
             List<Product> products = category.getProducts();
@@ -53,6 +54,5 @@ public class MainWindow extends JFrame {
                 productsWithCategories.add(new NameLabel(product.getName()).getLabel());
             }
         }
-
     }
 }

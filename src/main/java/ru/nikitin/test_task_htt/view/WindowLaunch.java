@@ -13,9 +13,9 @@ import java.awt.*;
 @Profile("view")
 public class WindowLaunch implements CommandLineRunner {
 
-    private final MainWindow window;
+    private final Display window;
 
-    public WindowLaunch(MainWindow window) {
+    public WindowLaunch(Display window) {
         this.window = window;
     }
 
